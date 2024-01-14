@@ -11,23 +11,19 @@ class Service implements ServiceInterface
     const FACTORY =  2;
     const PROTOTYPE = 3;
 
-    private string $_name;
+    private string $_alias;
     private string $_nameSpace;
-
     private object $_instance;
-
-    /**
-     * Service constructor parameters
-     * 
-     * @template TParameters array<string,Parameter>
-     * 
-     * @var TParameters 
-     */
     private array $_parameters;
 
     private $_callback;
     private Context $_context;
     private ServiceInfo $_info;
+
+    public function __construct(string $alias_or_namespaced, array $parameters)
+    {
+        
+    }
     
 
     public function getInstance(): object

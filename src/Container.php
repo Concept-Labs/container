@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Cl\Container;
 
 use Cl\Container\Service\ServiceRepositoryAggregateInterface;
@@ -26,13 +27,13 @@ class Container implements ContainerInterface
             throw new NotFoundException(sprintf('Service with id "%s" not found'));
         }
         
-            /** @var ServiceRepositoryInterface  $serviceRepository */
-            foreach ($this->ServiceRepositoryAggregate as $serviceRepository) {
-                if ($serviceRepository->has($id)) {
-                    $service = $serviceRepository->get($id);
-                    break;
-                }
+        /** @var ServiceRepositoryInterface  $serviceRepository */
+        foreach ($this->ServiceRepositoryAggregate as $serviceRepository) {
+            if ($serviceRepository->has($id)) {
+                $service = $serviceRepository->get($id);
+                break;
             }
+        }
         
         throw new NotFoundException(sprintf('Service with id "%s" not found'));
     }

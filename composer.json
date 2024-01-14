@@ -24,7 +24,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Cl\\Cache\\Test\\": "src/test/"
+            "Cl\\Cache\\Test\\": "test/"
         }
     }
 
