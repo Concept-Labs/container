@@ -2,14 +2,15 @@
 declare(strict_types=1);
 namespace Cl\Container\Arrayable\Priority;
 
-use Cl\Able\Resettable\ResettableInterface;
+use Cl\Container\Arrayable\ArrayContainer;
+use Cl\Container\ContainerInterface;
 use Cl\Container\Exception\DuplicateException;
 use Cl\Container\Exception\InvalidArgumentException;
-use Countable;
-use IteratorAggregate;
+
 use Traversable;
 
-class PriorityContainer implements ResettableInterface, IteratorAggregate, Countable
+class PriorityContainer extends ArrayContainer 
+    implements ContainerInterface
 {
     /**
      * @var array The arrayable storage.
@@ -57,12 +58,10 @@ class PriorityContainer implements ResettableInterface, IteratorAggregate, Count
     {
         if (count($container)) {
             foreach ($container as $key => $items) {
-                foreach ($items as $item) {
-                    if (!is_array($item)) {
-                        throw new InvalidArgumentException(
-                            _("Initial container must be two-deminition array")
-                        );
-                    }
+                if (!is_array($items)) {
+                    throw new InvalidArgumentException(
+                        _("Initial container must be two-deminition array")
+                    );
                 }
             }
         }
@@ -91,7 +90,11 @@ class PriorityContainer implements ResettableInterface, IteratorAggregate, Count
         $priority = $priority <= static::MAX_PRIORITY ? $priority : static::MAX_PRIORITY;
 
         // Check for duplicates
-        if ($this->has($item) && $duplicate_check) {
+        if ($duplicate_check && $this->has($item)) {
+            // $item = $this->container[$has['priority']][$has['key']];
+            // if (is_callable($item)|| is_object($item)) {
+            //     throw new DuplicateException;
+            // }
             throw new DuplicateException;
         }
 
@@ -208,11 +211,11 @@ class PriorityContainer implements ResettableInterface, IteratorAggregate, Count
     /**
      * Gets the container items as iterator
      *
-     * @return Traversable
+     * @return array
      */
-    public function get(): Traversable
+    public function get(int|string $id = null): array
     {
-        return $this->getIterator();
+        return $this->getArray();
     }
 
     /**
@@ -222,21 +225,7 @@ class PriorityContainer implements ResettableInterface, IteratorAggregate, Count
      */
     public function getArray(): array
     {
-        $array = [];
-        foreach ($this->getIterator() as $item) {
-            $array[] = $item;
-        }
-        return $array;
-    }
-
-    /**
-     * Gets the array copy of container in priority order
-     *
-     * @return array
-     */
-    public function getArrayCopy(): array
-    {
-        return iterator_to_array($this->getIterator());
+        return iterator_to_array($this);
     }
 
     /**

@@ -7,6 +7,8 @@ use Cl\Container\Arrayable\Priority\PriorityContainer;
 use Cl\Container\Exception\DuplicateException;
 use PHPUnit\Framework\TestCase;
 
+use function PHPUnit\Framework\assertSame;
+
 /**
  * @covers Cl\Container\Arrayable\Priority\PriorityContainer
  */
@@ -158,5 +160,25 @@ class PriorityContainerTest extends TestCase
 
         // Container should be empty after resetting
         $this->assertSame(0, $container->count());
+    }
+
+    public function testReturnedObectIsOriginal(): void
+    {
+        $container = new PriorityContainer();
+        $item = new class {
+            public $property = 'original';
+        };
+
+        $container->attach($item);
+
+        $array = $container->get();
+        
+        assertSame($array[0], $item);
+
+        $array[0]->property = 'handled';
+
+        assertSame('handled', $item->property);
+        assertSame('handled', $array[0]->property);
+
     }
 }
