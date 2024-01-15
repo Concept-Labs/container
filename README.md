@@ -1,2 +1,2 @@
 # container
-PSR 11 Container
+Set of containers
