@@ -1,22 +1,22 @@
 <?php
-namespace Cl\Container\ArrayPathIterator\Cacheable;
+namespace Cl\Container\ArrayPath\Cacheable;
 
 use Cl\Cache\CacheItemPoolInterface;
-use Cl\Container\ArrayPathIterator\ArrayPathIterator;
-use Cl\Container\ArrayPathIterator\ArrayPathIteratorInterface;
+use Cl\Container\ArrayPath\ArrayPath;
+use Cl\Container\ArrayPath\ArrayPathInterface;
 
 /**
- * Cacheable ArrayPathIterator
+ * Cacheable ArrayPath
  */
-class CacheableArrayPathIterator extends ArrayPathIterator implements CacheableArrayPathIteratorInterface
+class CacheableArrayPath extends ArrayPath implements CacheableArrayPathInterface
 {
     /**
-     * Trait for implementation CacheableArrayPathIteratorInterface 
+     * Trait for implementation CacheableArrayPathInterface 
      */
-    use CacheableArrayPathIteratorTrait;
+    use CacheableArrayPathTrait;
 
     /**
-     * CacheableArrayPathIterator constructor.
+     * CacheableArrayPath constructor.
      *
      * @param CacheItemPoolInterface $cacheItemPool 
      * @param array                  $data 
@@ -32,7 +32,7 @@ class CacheableArrayPathIterator extends ArrayPathIterator implements CacheableA
     /**
      * {@inheritDoc}
      */
-    public function getChild(array $data, string $path,): ArrayPathIteratorInterface
+    public function getChild(array $data, string $path,): ArrayPathInterface
     {
         $cacheItemPool = $this->getCacheItemPool();
         return new static($cacheItemPool, $data, $path);

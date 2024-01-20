@@ -1,12 +1,12 @@
 <?php
 
-namespace Cl\Container\ArrayPathIterator;
+namespace Cl\Container\ArrayPath;
 
-trait ArrayPathIteratorPropertyTrait
+trait ArrayPathPropertyTrait
 {
 
     protected string $path = '';
-    protected ArrayPathIteratorInterface|null $parentInstance = null;
+    protected ArrayPathInterface|null $parentInstance = null;
     protected string $separator = self::PATH_DEFAULT_SEPARATOR;
     protected int $flags = 0;
 
@@ -26,9 +26,9 @@ trait ArrayPathIteratorPropertyTrait
      * 
      * @param string $path The path
      *
-     * @return ArrayPathIteratorInterface
+     * @return ArrayPathInterface
      */
-    public function setPath(string $path): ArrayPathIteratorInterface
+    public function setPath(string $path): ArrayPathInterface
     {
         $this->path = $path;
         return $this;
@@ -47,9 +47,9 @@ trait ArrayPathIteratorPropertyTrait
     /**
      * Get the parent instance.
      *
-     * @return ArrayPathIteratorInterface|null
+     * @return ArrayPathInterface|null
      */
-    public function getParent(): ArrayPathIteratorInterface|null
+    public function getParent(): ArrayPathInterface|null
     {
         return $this->parentInstance;
     }
@@ -59,9 +59,9 @@ trait ArrayPathIteratorPropertyTrait
      * 
      * @param $parentInstance The parent instance
      *
-     * @return ArrayPathIteratorInterface|null
+     * @return ArrayPathInterface|null
      */
-    public function setParent(ArrayPathIteratorInterface $parentInstance): ArrayPathIteratorInterface|null
+    public function setParent(ArrayPathInterface $parentInstance): ArrayPathInterface|null
     {
         $this->parentInstance = $parentInstance;
 

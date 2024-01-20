@@ -1,5 +1,5 @@
 <?php
-namespace Cl\Container\ArrayPathIterator\Exception;
+namespace Cl\Container\ArrayPath\Exception;
 
 class InvalidPathException extends \Exception
 {}

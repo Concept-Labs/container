@@ -1,11 +1,11 @@
 <?php
-namespace Cl\Container\ArrayPathIterator;
+namespace Cl\Container\ArrayPath;
 
-class ArrayPathIterator extends \ArrayIterator implements ArrayPathIteratorInterface
+class ArrayPath extends \ArrayIterator implements ArrayPathInterface
 {
-    use ArrayPathIteratorPropertyTrait;
-    use ArrayPathIteratorSplitterTrait;
-    use ArrayPathIteratorTrait;
+    use ArrayPathPropertyTrait;
+    use ArrayPathSplitterTrait;
+    use ArrayPathTrait;
     
     /**
      * Default path separator.
@@ -13,7 +13,7 @@ class ArrayPathIterator extends \ArrayIterator implements ArrayPathIteratorInter
     const PATH_DEFAULT_SEPARATOR = ".";
 
     /**
-     * ArrayPathIterator constructor.
+     * ArrayPath constructor.
      *
      * @param array $data  
      * @param int   $flags 
@@ -29,9 +29,9 @@ class ArrayPathIterator extends \ArrayIterator implements ArrayPathIteratorInter
      * @param array  $data 
      * @param string $path The path  
      * 
-     * @return ArrayPathIteratorInterface
+     * @return ArrayPathInterface
      */
-    public function getChild(array $data, string $path): ArrayPathIteratorInterface
+    public function getChild(array $data, string $path): ArrayPathInterface
     {
         $childInstance = new static($data, $this->getFlags());
         $childInstance

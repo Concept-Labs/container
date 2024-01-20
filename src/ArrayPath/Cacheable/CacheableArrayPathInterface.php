@@ -1,13 +1,13 @@
 <?php
-namespace Cl\Container\ArrayPathIterator\Cacheable;
+namespace Cl\Container\ArrayPath\Cacheable;
 
 use Cl\Cache\CacheItemPoolInterface;
-use Cl\Container\ArrayPathIterator\ArrayPathIteratorInterface;
+use Cl\Container\ArrayPath\ArrayPathInterface;
 
 /**
- * Cacheable ArrayPathIterator interface
+ * Cacheable ArrayPath interface
  */
-interface CacheableArrayPathIteratorInterface extends ArrayPathIteratorInterface
+interface CacheableArrayPathInterface extends ArrayPathInterface
 {
 
     /**
@@ -24,7 +24,7 @@ interface CacheableArrayPathIteratorInterface extends ArrayPathIteratorInterface
      *
      * @return CacheItemPoolInterface
      */
-    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool) : CacheableArrayPathIteratorInterface;
+    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool) : CacheableArrayPathInterface;
 
     /**
      * Get the cache key.

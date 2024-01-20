@@ -1,16 +1,16 @@
 <?php
 use PHPUnit\Framework\TestCase;
-use Cl\Container\ArrayPathIterator\ArrayPathIterator;
-use Cl\Container\ArrayPathIterator\ArrayPathIteratorInterface;
-use Cl\Container\ArrayPathIterator\Exception\InvalidPathException;
+use Cl\Container\ArrayPath\ArrayPath;
+use Cl\Container\ArrayPath\ArrayPathInterface;
+use Cl\Container\ArrayPath\Exception\InvalidPathException;
 
 /**
- * @covers Cl\Container\ArrayPathIterator\ArrayPathIterator
+ * @covers Cl\Container\ArrayPath\ArrayPath
  */
-class ArrayPathIteratorTest extends TestCase
+class ArrayPathTest extends TestCase
 {
-    protected ArrayPathIterator $arrayPathIterator;
-    public function arrayPathIteratorDataProvider()
+    protected ArrayPath $ArrayPath;
+    public function ArrayPathDataProvider()
     {
         
     }
@@ -24,20 +24,20 @@ class ArrayPathIteratorTest extends TestCase
             'childInstance' => ['a','b'],
             
         ];
-        $this->arrayPathIterator =  new ArrayPathIterator($data);
+        $this->ArrayPath =  new ArrayPath($data);
     }
     /**
      * Test the getter
      *
      * @return void
      */
-    #[DataProvider('arrayPathIteratorDataProvider')]
+    #[DataProvider('ArrayPathDataProvider')]
     public function testOffsetGetByKey()
     {
-        $result = $this->arrayPathIterator->offsetGet('a');
+        $result = $this->ArrayPath->offsetGet('a');
         $this->assertSame(['b' => 'value'], $result->getArrayCopy());
 
-        $result = $this->arrayPathIterator['a'];
+        $result = $this->ArrayPath['a'];
         $this->assertSame(['b' => 'value'], $result->getArrayCopy());
     }
 
@@ -48,14 +48,14 @@ class ArrayPathIteratorTest extends TestCase
      */
     public function testOffsetGetByPath()
     {
-        $result = $this->arrayPathIterator->offsetGet('a.b');
+        $result = $this->ArrayPath->offsetGet('a.b');
         $this->assertSame('value', $result);
 
-        $result = $this->arrayPathIterator['a.b'];
+        $result = $this->ArrayPath['a.b'];
         $this->assertSame('value', $result);
         
-        $result = $this->arrayPathIterator->offsetGet('a');
-        $this->assertInstanceOf(ArrayPathIteratorInterface::class, $result);
+        $result = $this->ArrayPath->offsetGet('a');
+        $this->assertInstanceOf(ArrayPathInterface::class, $result);
     }
 
     /**
@@ -65,8 +65,8 @@ class ArrayPathIteratorTest extends TestCase
      */
     public function testOffsetGetByPathReturnInstance()
     {
-        $result = $this->arrayPathIterator->offsetGet('"a.a"');
-        $this->assertInstanceOf(ArrayPathIteratorInterface::class, $result);
+        $result = $this->ArrayPath->offsetGet('"a.a"');
+        $this->assertInstanceOf(ArrayPathInterface::class, $result);
     }
 
     /**
@@ -76,8 +76,8 @@ class ArrayPathIteratorTest extends TestCase
      */
     public function testOffsetGetByPathSplitter()
     {
-        $result = $this->arrayPathIterator->offsetGet('"a.a".b');
-        $this->assertInstanceOf(ArrayPathIteratorInterface::class, $result);
+        $result = $this->ArrayPath->offsetGet('"a.a".b');
+        $this->assertInstanceOf(ArrayPathInterface::class, $result);
         $this->assertSame(['c.c'=>'value'], (array)$result);
     }
 
@@ -90,7 +90,7 @@ class ArrayPathIteratorTest extends TestCase
     {
         $this->expectException(InvalidPathException::class);
 
-        $this->arrayPathIterator->offsetGet('invalid.path');
+        $this->ArrayPath->offsetGet('invalid.path');
     }
 
     /**
@@ -101,15 +101,15 @@ class ArrayPathIteratorTest extends TestCase
     public function testNewChildInstance()
     {
         $data = ['a' => ['b' => ['c','d'=>'e']]];
-        $iterator = new ArrayPathIterator($data);
-        /** @var ArrayPathIterator $child */
+        $iterator = new ArrayPath($data);
+        /** @var ArrayPath $child */
         $child = $iterator['a.b'];
 
-        $this->assertInstanceOf(ArrayPathIterator::class, $child);
+        $this->assertInstanceOf(ArrayPath::class, $child);
         $this->assertSame(['c','d'=>'e'], $child->getArrayCopy());
         $this->assertSame('a.b', $child->getPath());
         $this->assertSame($iterator, $child->getParent());
-        $this->assertSame(ArrayPathIterator::PATH_DEFAULT_SEPARATOR, $child->getSeparator());
+        $this->assertSame(ArrayPath::PATH_DEFAULT_SEPARATOR, $child->getSeparator());
         $this->assertSame(0, $child->getFlags());
     }
 }

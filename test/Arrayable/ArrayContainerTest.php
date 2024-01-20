@@ -24,7 +24,7 @@ class ArrayContainerTest extends TestCase
         $arrayContainer->attach('itemA');
         $arrayContainer->attach('itemB');
 
-        $this->assertTrue($arrayContainer->detach('itemA'));
+        $arrayContainer->detach('itemA');
         $this->assertSame(['itemB'], $arrayContainer->getArray());
     }
 
@@ -33,7 +33,8 @@ class ArrayContainerTest extends TestCase
         $arrayContainer = new ArrayContainer();
         $arrayContainer->attach('itemA');
 
-        $this->assertFalse($arrayContainer->detach('nonExistentItem'));
+        $arrayContainer->detach('nonExistentItem');
+        $this->assertSame(1, $arrayContainer->count());
     }
 
     public function testHas()

@@ -1,12 +1,12 @@
 <?php
-namespace Cl\Container\ArrayPathIterator\Cacheable;
+namespace Cl\Container\ArrayPath\Cacheable;
 
 use Cl\Cache\CacheItemPoolInterface;
 
 /**
- * Trait for CacheableArrayPathIterator
+ * Trait for CacheableArrayPath
  */
-trait CacheableArrayPathIteratorTrait
+trait CacheableArrayPathTrait
 {
     /**
      * Cache storage
@@ -26,7 +26,7 @@ trait CacheableArrayPathIteratorTrait
     /**
      * {@inheritDoc}
      */
-    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool) : CacheableArrayPathIteratorInterface
+    public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool) : CacheableArrayPathInterface
     {
         $this->cacheItemPool = $cacheItemPool;
 

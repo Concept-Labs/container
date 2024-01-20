@@ -8,7 +8,7 @@ use IteratorAggregate;
 
 interface BucketContainerInterface extends Countable, IteratorAggregate, ResettableInterface
 {
-    function attach(string $section, ContainerInterface $item): void;
-    function has(string $section);
+    function attach(ContainerInterface $item, string $section): void;
+    function has(string $section): bool;
     function get(string $section): ContainerInterface;
 }

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
-namespace Cl\Container\Arrayable;
+namespace Cl\Container;
 
 use Cl\Container\ContainerInterface;
-use Cl\Container\Exception\DuplicateException;
 use Cl\Container\Exception\InvalidArgumentException;
-
+use Exception;
+use IteratorAggregate;
 use Traversable;
 
-class ArrayContainer implements ContainerInterface
+class SimpleContainer implements ContainerInterface, IteratorAggregate
 {
     /**
      * @var array The arrayable storage.
@@ -16,16 +16,10 @@ class ArrayContainer implements ContainerInterface
     protected $container = [];
 
     /**
-     * @var int The count of items
-     */
-    protected $count = 0;
-
-    /**
      * Constructor
      *
      * @param array $container The initial container
      * 
-     * @throws InvalidArgumentException If the initial container is not a two-dimensional array.
      */
     public function __construct(array $container = [])
     {
@@ -39,7 +33,7 @@ class ArrayContainer implements ContainerInterface
      * 
      * @return void
      */
-    public function attach(mixed $item): void 
+    public function attach(mixed $item, $key = null): void 
     {
         $this->container[] = $item;
     }
@@ -49,16 +43,14 @@ class ArrayContainer implements ContainerInterface
      *
      * @param mixed $item 
      * 
-     * @return boolean True if successfully detached, false otherwise
+     * @return void 
      */
-    public function detach(mixed $item): bool
+    public function detach(mixed $item): void
     {
-        if (false !== $has = $this->has($item, true)) {
+        while (false !== $has = $this->has($item, true)) {
             unset($this->container[$has]);
-            $this->container = array_values($this->container);
-            return true;
         }
-        return false;
+        $this->container = array_values($this->container);
     }
 
     /**
@@ -68,9 +60,21 @@ class ArrayContainer implements ContainerInterface
      * 
      * @return mixed 
      */
-    public function has(mixed $item): mixed
+    public function hasItem(mixed $item): mixed
     {
         return array_search($item, $this->container);
+    }
+    
+    /**
+     * Check if the container has a specific id.
+     *
+     * @param mixed $item The item to check for.
+     * 
+     * @return mixed 
+     */
+    public function has(mixed $id): mixed
+    {
+        return !empty($this->container[$id]);
     }
 
 
@@ -88,26 +92,28 @@ class ArrayContainer implements ContainerInterface
     /**
      * Gets the container items as iterator
      * 
-     * @param int|string $id 
+     * @param mixed $id 
      *
      * @return mixed
      */
-    public function get(int|string $id = null): mixed
+    public function get(mixed $id, $default = null): mixed
     {
-        return match (true) {
-            null === $id => $this->container,
-            default => $this->container[$id]
-        };
+        try {
+            $id = (string)$id;
+        } catch (Exception $e) {
+            throw new InvalidArgumentException(_("Can not convert id to string"));
+        }
+        return $this->has($id) ? $this->container[$id] : $default;
     }
 
     /**
-     * Gets the array 
+     * Ge the container
      *
-     * @return array
+     * @return void
      */
-    public function getArray(): array
+    public function getAll(): iterable 
     {
-        return $this->get();
+        return $this->container;
     }
 
     /**

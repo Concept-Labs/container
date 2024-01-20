@@ -1,8 +1,8 @@
 <?php
 
-namespace Cl\Container\ArrayPathIterator;
+namespace Cl\Container\ArrayPath;
 
-trait ArrayPathIteratorSplitterTrait
+trait ArrayPathSplitterTrait
 {
     /**
      * Split the path string by a separator. Default is @see const PATH_DEFAULT_SEPARATOR

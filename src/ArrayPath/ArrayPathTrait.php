@@ -1,10 +1,10 @@
 <?php
 
-namespace Cl\Container\ArrayPathIterator;
+namespace Cl\Container\ArrayPath;
 
-use Cl\Container\ArrayPathIterator\Exception\InvalidPathException;
+use Cl\Container\ArrayPath\Exception\InvalidPathException;
 
-trait ArrayPathIteratorTrait
+trait ArrayPathTrait
 {
     /**
      * Get the value at the specified offset or at the specified path.

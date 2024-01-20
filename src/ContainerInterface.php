@@ -2,12 +2,10 @@
 declare(strict_types=1);
 namespace Cl\Container;
 
-use Cl\Able\Resettable\ResettableInterface;
-use IteratorAggregate;
-use Countable;
 
-interface ContainerInterface extends Countable, ResettableInterface, IteratorAggregate
+interface ContainerInterface
 {
-    function attach($item): void;
-    function has($item);
+    function attach($item);
+    function get(): mixed;
+    //function has($id): bool;
 }

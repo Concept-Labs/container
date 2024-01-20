@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
-namespace Cl\Container\Arrayable;
+namespace Cl\Container;
 
 use Cl\Container\Arrayable\Exception\SectionNotFoundException;
-use Cl\Container\BucketContainerInterface;
 use Cl\Container\ContainerInterface;
+use IteratorAggregate;
 use Traversable;
 
 
@@ -14,7 +14,7 @@ use Traversable;
  * Implementation of the BucketContainerInterface.
  * Represents a container that can hold other containers identified by sections.
  */
-class BucketContainer implements BucketContainerInterface
+class BucketContainer implements BucketContainerInterface, IteratorAggregate
 {
     /**
      * @var ContainerInterface[] An associative array to store containers with sections as keys.
@@ -39,7 +39,7 @@ class BucketContainer implements BucketContainerInterface
      * 
      * @return void
      */
-    public function attach(string $section, ContainerInterface $container): void
+    public function attach(ContainerInterface $container, string $section): void
     {
         $this->bucket[$section] = $container;
         $this->counted = false;
@@ -52,7 +52,7 @@ class BucketContainer implements BucketContainerInterface
      * 
      * @return bool True if the container exists, false otherwise.
      */
-    public function has(string $section) 
+    public function has(string $section): bool
     {
         return !empty($this->bucket[$section]);
     }

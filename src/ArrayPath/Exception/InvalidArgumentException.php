@@ -1,5 +1,5 @@
 <?php
-namespace Cl\Container\IteratorAgregate\Exception;
+namespace Cl\Container\ArrayPath\Exception;
 
 class InvalidArgumentException extends \InvalidArgumentException
 {}
