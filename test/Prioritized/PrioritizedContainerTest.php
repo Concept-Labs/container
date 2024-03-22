@@ -120,37 +120,23 @@ class PrioritizedContainerTest extends TestCase
         $this->assertFalse($iterator->valid());
     }
 
-    public function testPreserveKeysTrue(): void
+    public function testPreserveKeys(): void
     {
         $container = new PrioritizedContainer();
 
         $item1 = new \stdClass();
         $item2 = new \stdClass();
         $item3 = new \stdClass();
-
         $container->attach($item1, 10);
         $container->attach($item2, 40);
         $container->attach($item3, 30);
-        $this->assertSame([$item2, $item3, $item1], iterator_to_array($container->get(false)));
-        $this->assertSame([$item2, $item3, $item1], array_values(iterator_to_array($container->get(false))));
+        
+        $this->assertSame([$item2, $item3, $item1], iterator_to_array($container, false));
+        $this->assertSame([$item2, $item3, $item1], array_values(iterator_to_array($container, false)));
         
     }
 
-    public function testPreserveKeysFalse(): void
-    {
-        $container = new PrioritizedContainer();
 
-        $item1 = new \stdClass();
-        $item2 = new \stdClass();
-        $item3 = new \stdClass();
-
-        $container->attach($item1, 10);
-        $container->attach($item2, 40);
-        $container->attach($item3, 30);
-        $this->assertNotSame([$item2, $item3, $item1], iterator_to_array($container->get()));
-        $this->assertSame([$item2, $item3, $item1], array_values(iterator_to_array($container->get(false))));
-        
-    }
     
     public function testgetMultiple(): void
     {
@@ -167,7 +153,7 @@ class PrioritizedContainerTest extends TestCase
         
         $this->assertSame(
             [$item1, $item2, $item3], 
-            array_values(iterator_to_array($container->getByHash($hashes)))
+            array_values(iterator_to_array($container->getMultiple($hashes)))
         );
         
     }

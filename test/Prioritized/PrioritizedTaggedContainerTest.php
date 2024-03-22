@@ -49,30 +49,30 @@ class PrioritizedTaggedContainerTest extends TestCase
 
         $this->assertSame(
             [$item2, $item1, $item11],
-            iterator_to_array($container->get('tag1', false))
+            iterator_to_array($container->getMultiple(['tag1'], false))
         );
         $this->assertSame(
             [$item3, $item1], 
-            iterator_to_array($container->get('tag2'), false)
+            iterator_to_array($container->getMultiple(['tag2']), false)
         );
 
 
         $this->assertSame(
             [$item3, $item2], 
-            iterator_to_array($container->get('tag3'), false)
+            iterator_to_array($container->getMultiple(['tag3']), false)
         );
 
         $this->assertSame(
             [$item3, $item2, $item1, $item11], 
-            iterator_to_array($container->get(['tag3', 'tag1'], false))
+            iterator_to_array($container->getMultiple(['tag3', 'tag1'], false))
         );
 
-        // W/o tags (untagged)
+
         $this->assertSame(
             [$item5], 
-            array_values(iterator_to_array($container->get('untagged')))
+            array_values(iterator_to_array($container->getMultiple(['untagged']), false))
         );
-
+        
         $this->assertSame(
             [
                 'tag1' => [
@@ -88,7 +88,7 @@ class PrioritizedTaggedContainerTest extends TestCase
                     $item5
                 ],
             ],
-            iterator_to_array($container->getMultipleGrouped([], false))
+            $container->getMultipleGrouped([], false)
         );
 
         $this->assertEquals(5, $container->count());
