@@ -3,7 +3,7 @@ namespace Ctl\Container\Preference;
 
 use Psr\Container\ContainerInterface;
 use Ctl\Config\ConfigInterface;
-use Xtc\Config\ConfigAwareTrait;
+use Ctl\Config\ConfigAwareTrait;
 use Ctl\Container\Exception\InstantiateException;
 use Ctl\Container\Preference\Exception\PreferenceException;
 use Ctl\Container\Preference\Parameter\Parameter;

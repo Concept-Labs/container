@@ -3,8 +3,8 @@ namespace Ctl\Container\Preference\Parameter;
 
 use Psr\Container\ContainerInterface;
 use Ctl\Config\ConfigInterface;
-use Xtc\Config\ConfigAwareInterface;
-use Xtc\Config\ConfigAwareTrait;
+use Ctl\Config\ConfigAwareInterface;
+use Ctl\Config\ConfigAwareTrait;
 
 use Ctl\Container\Preference\Parameter\Exception\ParameterException;
 use Ctl\Container\Resolver\Resolver;
