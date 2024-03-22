@@ -26,6 +26,7 @@ class Container
         ConfigAwareInterface,
         ServiceRepositoryAwareInterface
 {
+    use ConfigAwareTrait;
     use ContainerStateTrait;
     use ContainerCallStackTrait;
     use ContainerPreferenceTrait;
