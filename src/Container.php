@@ -16,9 +16,6 @@ use Ctl\Container\Exception\InvalidArgumentException;
 use Ctl\Container\Exception\NotFoundException;
 
 use Ctl\Container\ServiceRepository\ServiceRepositoryInterface;
-use Ctl\EventDispatcher\EventDispatcherAwareTrait;
-use Ctl\EventDispatcher\ListenerProviderAwareTrait;
-use Ctl\Debug\DebuggerAwareTrait;
 
 /**
  * PSR Container
@@ -27,19 +24,13 @@ class Container
     implements 
         ContainerInterface,
         ConfigAwareInterface,
-        ServiceRepositoryAwareInterface,
-        LoggerAwareInterface
+        ServiceRepositoryAwareInterface
 {
     use ContainerStateTrait;
     use ContainerCallStackTrait;
     use ContainerPreferenceTrait;
     
-    use ConfigAwareTrait;
     use ServiceRepositoryAwareTrait;
-    use LoggerAwareTrait;
-    use EventDispatcherAwareTrait;
-    use ListenerProviderAwareTrait;
-    use DebuggerAwareTrait;
 
     /**
      * The constructor
