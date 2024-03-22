@@ -1,10 +1,5 @@
 <?php
-declare(strict_types=1);
-namespace Cl\Container\Exception;
+namespace Ctl\Container\Exception;
 
-
-class InvalidArgumentException extends ContainerException 
-    implements InvalidArgumentExceptionInterface
-{
-    
-}
+class InvalidArgumentException extends ContainerException
+{}
