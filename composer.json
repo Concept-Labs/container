@@ -1,7 +1,7 @@
 {
     "name": "concept-labs/container",
     "description": "(C)oncept-Labs Containers",
-    "keywords": ["php","container"],
+    "keywords": ["php","container", "psr"],
     "license": "MIT",
     "authors": [
         {
@@ -11,12 +11,11 @@
     ],
     "require": {
         "php": "^7.2||^7.4||^8.0||^8.2",
-        "concept-labs/config": "^1.0",
-        "psr/container": "^2.0"
+        "psr/container": "^1"
     },
     "autoload": {
         "psr-4": {
-            "Ctl\\Container\\": "src/"
+            "Concept\\Container\\": "src/"
         }
     },
     "require-dev": {
@@ -24,7 +23,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Cl\\Container\\Test\\": "test/"
+            "Concept\\Container\\Test\\": "test/"
         }
     }
 
