@@ -1,11 +1,13 @@
 <?php
 namespace Concept\Container;
 
-use Psr\Container\ContainerInterface;
 use Concept\Container\Exception\NotFoundException;
 
 class Container implements ContainerInterface
 {
+    /**
+     * @todo Implement not array sevice container?
+     */
     protected array $services = [];
 
     /**
@@ -41,10 +43,12 @@ class Container implements ContainerInterface
      * @param string $id
      * @param mixed $service
      * 
-     * @return void
+     * @return self
      */
-    public function attach(string $id, $service): void
+    public function attach(string $id, $service): self
     {
         $this->services[$id] = $service;
+
+        return $this;
     }
 }
