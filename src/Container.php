@@ -2,8 +2,9 @@
 namespace Concept\Container;
 
 use Concept\Container\Exception\NotFoundException;
+use Concept\Prototype\NonPrototypableInterface;
 
-class Container implements ContainerInterface
+class Container implements ContainerInterface, NonPrototypableInterface
 {
     /**
      * @todo Implement not array sevice container?
@@ -47,6 +48,9 @@ class Container implements ContainerInterface
      */
     public function attach(string $id, $service): self
     {
+        if ($this->has($id)) {
+            throw new \RuntimeException("Service already exists: $id");
+        }
         $this->services[$id] = $service;
 
         return $this;

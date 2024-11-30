@@ -24,6 +24,11 @@
         "psr-4": {
             "Concept\\Container\\Test\\": "test/"
         }
+    },
+    "extra": {
+        "concept": {
+            "include": "concept.json"
+        }
     }
 
 }
