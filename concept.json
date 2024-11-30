@@ -1,0 +1,13 @@
+{
+    "di": {
+        "package": {
+            "concept-labs/container": {
+                "preference": {
+                    "Psr\\Container\\ContainerInterface": {
+                        "class": "Concept\\Container\\Container"
+                    }
+                }
+            }
+        }
+    }
+}
