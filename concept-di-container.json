@@ -1,9 +1,0 @@
-{
-    "di": {
-        "preference": {
-            "Psr\\Container\\ContainerInterface": {
-                "class": "Concept\\Container\\Container"
-            }
-        }
-    }
-}
